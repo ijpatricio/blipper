@@ -14,6 +14,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const terminals = {};
 const orphanedTerminals = new Set();
+const terminalHistory = new Map(); // Store complete terminal history
+const MAX_HISTORY_SIZE = 50000; // Max characters of history per terminal (50KB)
 let terminalCounter = 0;
 
 io.on('connection', (socket) => {
@@ -40,12 +42,28 @@ io.on('connection', (socket) => {
             socket: socket.id
         };
 
+        // Initialize history buffer for this terminal
+        terminalHistory.set(terminalId, '');
+
         term.on('data', (data) => {
-            socket.emit('terminal-output', { terminalId, data });
+            // Always add to history buffer
+            let history = terminalHistory.get(terminalId) + data;
+            if (history.length > MAX_HISTORY_SIZE) {
+                // Keep the most recent history by trimming from the beginning
+                history = history.slice(-MAX_HISTORY_SIZE);
+            }
+            terminalHistory.set(terminalId, history);
+
+            // Send data to client if connected
+            if (terminals[terminalId].socket) {
+                io.to(terminals[terminalId].socket).emit('terminal-output', { terminalId, data });
+            }
         });
 
         term.on('exit', () => {
             delete terminals[terminalId];
+            orphanedTerminals.delete(terminalId);
+            terminalHistory.delete(terminalId);
             socket.emit('terminal-closed', { terminalId });
         });
 
@@ -80,6 +98,7 @@ io.on('connection', (socket) => {
             terminals[terminalId].process.kill();
             delete terminals[terminalId];
             orphanedTerminals.delete(terminalId);
+            terminalHistory.delete(terminalId);
             socket.emit('terminal-closed', { terminalId });
             console.log(`Terminal ${terminalId} explicitly killed`);
         }
@@ -104,13 +123,24 @@ io.on('connection', (socket) => {
             orphanedTerminals.delete(terminalId);
             console.log(`Terminal ${terminalId} adopted by client ${socket.id}`);
             
-            // Re-establish data flow
-            terminals[terminalId].process.removeAllListeners('data');
-            terminals[terminalId].process.on('data', (data) => {
-                socket.emit('terminal-output', { terminalId, data });
-            });
+            // Send complete terminal history
+            if (terminalHistory.has(terminalId)) {
+                const history = terminalHistory.get(terminalId);
+                if (history) {
+                    socket.emit('terminal-history', { terminalId, data: history });
+                }
+            }
             
             socket.emit('terminal-adopted', { terminalId });
+        }
+    });
+
+    socket.on('request-history', ({ terminalId }) => {
+        if (terminals[terminalId] && terminalHistory.has(terminalId)) {
+            const history = terminalHistory.get(terminalId);
+            if (history) {
+                socket.emit('terminal-history', { terminalId, data: history });
+            }
         }
     });
 });

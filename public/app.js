@@ -37,6 +37,16 @@ class TerminalManager {
             console.log(`Terminal ${terminalId} reconnected`);
         });
 
+        this.socket.on('terminal-history', ({ terminalId, data }) => {
+            const terminal = this.terminals.get(terminalId);
+            if (terminal) {
+                // Clear the terminal and write complete history
+                terminal.xterm.clear();
+                terminal.xterm.write(data);
+                console.log(`Restored ${data.length} characters of history for terminal ${terminalId}`);
+            }
+        });
+
         this.socket.on('connect', () => {
             console.log('Connected to server');
         });
@@ -167,6 +177,11 @@ class TerminalManager {
 
         this.hideWelcomeMessage();
         this.switchToTerminal(terminalId);
+        
+        // Request history for this terminal
+        setTimeout(() => {
+            this.socket.emit('request-history', { terminalId });
+        }, 100);
     }
 
     switchToTerminal(terminalId) {
