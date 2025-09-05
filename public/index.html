@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blipper - Multi Terminal</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/@xterm/xterm@5.5.0/lib/xterm.js"></script>
+    <script src="https://unpkg.com/@xterm/addon-fit@0.10.0/lib/addon-fit.js"></script>
+    <script src="https://unpkg.com/@xterm/addon-web-links@0.10.0/lib/addon-web-links.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@xterm/xterm@5.5.0/css/xterm.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="header">
+        <h1>Blipper - Multi Terminal</h1>
+        <button id="new-terminal-btn" class="btn">+ New Terminal</button>
+    </div>
+    
+    <div class="tab-container">
+        <div class="tabs" id="tabs"></div>
+    </div>
+    
+    <div class="terminal-container" id="terminal-container">
+        <div class="welcome-message">
+            <h2>Welcome to Blipper!</h2>
+            <p>Click "New Terminal" to create your first terminal session.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

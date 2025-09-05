@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(apt-get:*)",
+      "Bash(apt-get install:*)",
+      "Bash(npm view:*)",
+      "Bash(npm install:*)",
+      "Bash(npm start)",
+      "Bash(zip:*)",
+      "Bash(tar:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
