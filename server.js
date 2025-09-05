@@ -13,10 +13,14 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 
 const terminals = {};
+const orphanedTerminals = new Set();
 let terminalCounter = 0;
 
 io.on('connection', (socket) => {
     console.log('Client connected:', socket.id);
+    
+    // Send existing orphaned terminals to new client
+    socket.emit('existing-terminals', Array.from(orphanedTerminals));
 
     socket.on('create-terminal', () => {
         terminalCounter++;
@@ -50,34 +54,64 @@ io.on('connection', (socket) => {
     });
 
     socket.on('terminal-input', ({ terminalId, data }) => {
-        if (terminals[terminalId] && terminals[terminalId].socket === socket.id) {
+        if (terminals[terminalId] && (terminals[terminalId].socket === socket.id || terminals[terminalId].socket === null)) {
             terminals[terminalId].process.write(data);
+            // If terminal was orphaned, adopt it
+            if (terminals[terminalId].socket === null) {
+                terminals[terminalId].socket = socket.id;
+                orphanedTerminals.delete(terminalId);
+            }
         }
     });
 
     socket.on('resize-terminal', ({ terminalId, cols, rows }) => {
-        if (terminals[terminalId] && terminals[terminalId].socket === socket.id) {
+        if (terminals[terminalId] && (terminals[terminalId].socket === socket.id || terminals[terminalId].socket === null)) {
             terminals[terminalId].process.resize(cols, rows);
+            // If terminal was orphaned, adopt it
+            if (terminals[terminalId].socket === null) {
+                terminals[terminalId].socket = socket.id;
+                orphanedTerminals.delete(terminalId);
+            }
         }
     });
 
     socket.on('kill-terminal', ({ terminalId }) => {
-        if (terminals[terminalId] && terminals[terminalId].socket === socket.id) {
+        if (terminals[terminalId] && (terminals[terminalId].socket === socket.id || terminals[terminalId].socket === null)) {
             terminals[terminalId].process.kill();
             delete terminals[terminalId];
+            orphanedTerminals.delete(terminalId);
             socket.emit('terminal-closed', { terminalId });
+            console.log(`Terminal ${terminalId} explicitly killed`);
         }
     });
 
     socket.on('disconnect', () => {
         console.log('Client disconnected:', socket.id);
         
+        // Mark terminals as orphaned instead of killing them
         Object.keys(terminals).forEach(terminalId => {
             if (terminals[terminalId].socket === socket.id) {
-                terminals[terminalId].process.kill();
-                delete terminals[terminalId];
+                orphanedTerminals.add(terminalId);
+                terminals[terminalId].socket = null; // Mark as orphaned
+                console.log(`Terminal ${terminalId} orphaned, continuing in background`);
             }
         });
+    });
+
+    socket.on('adopt-terminal', ({ terminalId }) => {
+        if (terminals[terminalId] && orphanedTerminals.has(terminalId)) {
+            terminals[terminalId].socket = socket.id;
+            orphanedTerminals.delete(terminalId);
+            console.log(`Terminal ${terminalId} adopted by client ${socket.id}`);
+            
+            // Re-establish data flow
+            terminals[terminalId].process.removeAllListeners('data');
+            terminals[terminalId].process.on('data', (data) => {
+                socket.emit('terminal-output', { terminalId, data });
+            });
+            
+            socket.emit('terminal-adopted', { terminalId });
+        }
     });
 });
 

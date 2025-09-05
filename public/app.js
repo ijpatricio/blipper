@@ -25,6 +25,18 @@ class TerminalManager {
             this.closeTerminal(terminalId);
         });
 
+        this.socket.on('existing-terminals', (terminalIds) => {
+            console.log('Restoring existing terminals:', terminalIds);
+            terminalIds.forEach(terminalId => {
+                this.restoreTerminalUI(terminalId);
+                this.socket.emit('adopt-terminal', { terminalId });
+            });
+        });
+
+        this.socket.on('terminal-adopted', ({ terminalId }) => {
+            console.log(`Terminal ${terminalId} reconnected`);
+        });
+
         this.socket.on('connect', () => {
             console.log('Connected to server');
         });
@@ -43,15 +55,30 @@ class TerminalManager {
         window.addEventListener('resize', () => {
             this.resizeActiveTerminal();
         });
+
+        // Allow processes to persist when navigating away or refreshing
+        window.addEventListener('beforeunload', () => {
+            console.log('Page unloading, terminals will persist in background');
+        });
     }
 
     createNewTerminal() {
         this.socket.emit('create-terminal');
     }
 
+    restoreTerminalUI(terminalId) {
+        this.terminalCounter++;
+        const terminalName = `Terminal ${this.terminalCounter} (restored)`;
+        this.createTerminalUIInternal(terminalId, terminalName);
+    }
+
     createTerminalUI(terminalId) {
         this.terminalCounter++;
         const terminalName = `Terminal ${this.terminalCounter}`;
+        this.createTerminalUIInternal(terminalId, terminalName);
+    }
+
+    createTerminalUIInternal(terminalId, terminalName) {
 
         const xterm = new Terminal({
             cursorBlink: true,
