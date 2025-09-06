@@ -9,7 +9,8 @@
       "Bash(npm start)",
       "Bash(zip:*)",
       "Bash(tar:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(sqlite3:*)"
     ],
     "deny": [],
     "ask": []
