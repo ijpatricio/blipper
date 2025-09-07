@@ -44,7 +44,7 @@ sudo apt install caddy
 
 # Get the VPS IP address
 VPS_IP=$(ip route get 8.8.8.8 | awk '{print $7}')
-HOST="static.$VPS_IP.clients.your-server.de"
+HOST="blipper.$VPS_IP.sslip.io"
 # Fetch the Caddyfile from GitHub and replace the placeholder
 CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/blipper/refs/heads/main/install/Caddyfile | sed "s/__DEFAULT_HETZNER_HOST__/$HOST/g")
 # Write the modified content to the Caddy configuration file
@@ -57,3 +57,5 @@ sudo systemctl daemon-reload
 sudo systemctl enable blipper
 sudo systemctl start blipper
 sudo systemctl status blipper --no-pager
+
+echo "System started, visit: http://$HOST"
