@@ -65,7 +65,7 @@ db.serialize(() => {
 
 const terminals = {};
 const orphanedTerminals = new Set();
-const MAX_HISTORY_SIZE = 50000; // Max characters of history per terminal (50KB)
+const MAX_HISTORY_SIZE = 100000; // Max characters of history per terminal (100KB)
 let terminalCounter = 0;
 
 io.on('connection', (socket) => {
