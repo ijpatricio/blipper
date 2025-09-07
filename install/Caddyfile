@@ -1,6 +1,18 @@
 # Refer to the Caddy docs for more information:
 # https://caddyserver.com/docs/caddyfile
 
-__DEFAULT_HETZNER_HOST__ {
+blipper.__IPV4__.sslip.io {
         reverse_proxy localhost:3000
+}
+
+project1.__IPV4__.sslip.io {
+        reverse_proxy localhost:3001
+}
+
+project2.__IPV4__.sslip.io {
+        reverse_proxy localhost:3002
+}
+
+project3.__IPV4__.sslip.io {
+        reverse_proxy localhost:3003
 }

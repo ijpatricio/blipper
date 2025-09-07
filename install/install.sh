@@ -43,13 +43,13 @@ sudo apt update
 sudo apt install caddy
 
 # Get the VPS IP address
-VPS_IP=$(ip route get 8.8.8.8 | awk '{print $7}')
-HOST="blipper.$VPS_IP.sslip.io"
+IPV4=$(ip route get 8.8.8.8 | awk '{print $7}')
+HOST="blipper.$IPV4.sslip.io"
 # Fetch the Caddyfile from GitHub and replace the placeholder
-CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/blipper/refs/heads/main/install/Caddyfile | sed "s/__DEFAULT_HETZNER_HOST__/$HOST/g")
+CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/blipper/refs/heads/main/install/Caddyfile | sed "s/__IPV4__/$IPV4/g")
 # Write the modified content to the Caddy configuration file
 echo "$CADDYFILE" | sudo tee /etc/caddy/Caddyfile > /dev/null
-echo "Caddyfile updated with IP: $VPS_IP"
+echo "Caddyfile updated with IP: $IPV4"
 sudo systemctl reload caddy
 
 # Install Blipper as a service, will run in the background
