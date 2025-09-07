@@ -39,7 +39,7 @@ npm ci
 cp .env.example .env
 
 # Install Blipper as a service, will run in the background
-sudo cp ~/blipper/configs/Blipper.service /etc/systemd/system/blipper.service
+sudo cp ~/blipper/install/Blipper.service /etc/systemd/system/blipper.service
 sudo systemctl daemon-reload
 sudo systemctl enable blipper
 sudo systemctl status blipper --no-pager
