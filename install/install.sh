@@ -45,7 +45,7 @@ HOST="static.$VPS_IP.clients.your-server.de"
 # Read the Caddyfile and replace the placeholder
 CADDYFILE=$(sed "s/__DEFAULT_HETZNER_HOST__/$HOST/g" ./install/Caddyfile)
 # Write the modified content to the Caddy configuration file
-echo "$CADDYFILE" | sudo tee /etc/caddy/Caddyfile > /dev/null
+echo "$CADDYFILE" | sudo sudo tee /etc/caddy/Caddyfile > /dev/null
 echo "Caddyfile updated with IP: $VPS_IP"
 
 # Download Blipper
