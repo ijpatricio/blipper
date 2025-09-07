@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get update
+sudo apt-get update
 
 # Install Node.js 24 using NodeSource repository
 curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
@@ -16,5 +16,4 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githu
 sudo apt-get update
 sudo apt-get install -y gh
 
-# Install Claude Code
 npm install -g @anthropic-ai/claude-code
