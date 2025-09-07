@@ -1,5 +1,6 @@
 node_modules
 .idea
 *.db
-.env.private
-run-private
+.env
+cloud-init.yml
+server-config.json
