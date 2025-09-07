@@ -42,7 +42,12 @@ cp .env.example .env
 sudo cp ~/blipper/configs/Blipper.service /etc/systemd/system/blipper.service
 sudo systemctl daemon-reload
 sudo systemctl enable blipper
-sudo systemctl status blipper
+sudo systemctl status blipper --no-pager
 
-Start the service, only after changing .env
-#sudo systemctl start blipper
+echo "┌─────────────────────────────────────────────┐"
+echo "│  ⚠️  IMPORTANT: Change .env file first!     │"
+echo "│                                             │"
+echo "│  Then run: sudo systemctl start blipper     │"
+echo "│                                             │"
+echo "│  Then visit http://VPS_IP:3000              │"
+echo "└─────────────────────────────────────────────┘"
