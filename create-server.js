@@ -8,7 +8,10 @@ async function createDroplet() {
         const cloudInitPath = path.join(__dirname, 'cloud-init.yml')
         const serverConfigPath = path.join(__dirname, 'server-config.json')
 
-        const cloudInitContent = fs.readFileSync(cloudInitPath, 'utf8')
+        let cloudInitContent = fs.readFileSync(cloudInitPath, 'utf8')
+        cloudInitContent = cloudInitContent.replace('{{SSH_PUBLIC_KEY}}', process.env.SSH_PUBLIC_KEY)
+
+        console.log(cloudInitContent)
 
         const serverConfigContent = fs.readFileSync(serverConfigPath, 'utf8')
         const serverConfig = JSON.parse(serverConfigContent)
