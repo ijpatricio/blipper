@@ -36,13 +36,13 @@ cd ~
 git clone https://github.com/ijpatricio/blipper.git
 cd blipper
 npm ci
+cp .env.example .env
 
-# Start and stop manually
-# npm run start
-
-# Install Blipper as a service
+# Install Blipper as a service, will run in the background
 sudo cp ~/blipper/configs/Blipper.service /etc/systemd/system/blipper.service
 sudo systemctl daemon-reload
 sudo systemctl enable blipper
-sudo systemctl start blipper
 sudo systemctl status blipper
+
+Start the service, only after changing .env
+#sudo systemctl start blipper

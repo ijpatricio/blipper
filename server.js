@@ -4,12 +4,43 @@ const socketIo = require('socket.io');
 const pty = require('node-pty');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
+const basicAuth = require('express-basic-auth');
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+
+const io = socketIo(server, {
+    allowRequest: (req, callback) => {
+        const auth = req.headers.authorization;
+        if (!auth || !auth.startsWith('Basic ')) {
+            return callback(null, false);
+        }
+        
+        const credentials = Buffer.from(auth.slice(6), 'base64').toString();
+        const [username, password] = credentials.split(':');
+        
+        const validUser = process.env.BASIC_AUTH_USER || 'admin';
+        const validPassword = process.env.BASIC_AUTH_PASSWORD || 'password';
+        
+        if (username === validUser && password === validPassword) {
+            return callback(null, true);
+        }
+        
+        callback(null, false);
+    }
+});
 
 const PORT = process.env.PORT || 3000;
+
+const users = {};
+users[process.env.BASIC_AUTH_USER || 'admin'] = process.env.BASIC_AUTH_PASSWORD || 'password';
+
+app.use(basicAuth({
+    users: users,
+    challenge: true,
+    realm: 'Blipper Terminal Access'
+}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
