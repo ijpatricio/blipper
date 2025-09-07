@@ -1,0 +1,6 @@
+# Refer to the Caddy docs for more information:
+# https://caddyserver.com/docs/caddyfile
+
+__DEFAULT_HETZNER_HOST__ {
+        reverse_proxy localhost:3000
+}
