@@ -14,3 +14,10 @@ groups:
 
 # Set timezone
 timezone: Europe/London
+
+runcmd:
+  - |
+    echo "BASIC_AUTH_USER={{BASIC_AUTH_USER}}" > /home/blipper/.initial-env
+    echo "BASIC_AUTH_PASSWORD={{BASIC_AUTH_PASSWORD}}" >> /home/blipper/.initial-env
+    su - blipper -c "curl -sSL https://raw.githubusercontent.com/ijpatricio/blipper/main/install/download.sh | bash"
+    su - blipper -c "cd /home/blipper/blipper && ./install/install.sh"

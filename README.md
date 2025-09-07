@@ -1,12 +1,20 @@
 # Blipper
 
-Have vibe coding remotely and async. Start stuff, get out, get back and continue.
+Blipper starts with desire to be able to tinker with agentic coding, while on the go, on my own terms!
 
-The gist is to be able to iterate on things, in a disposable VPS.
+ I'll in a browser, be it the mobile, or maybe at the desk as well, as I desire :)
 
-We'll use any CLI, for no it starts with Claude Code, and GitHub cli, if we want to pull/push private repos.
+- Remotely: I don't want things connecting to my computer, having to have it on, etc.
+- Async: I want to give a task, be able to leave and catch up later, to continue from there.
+- Multi-session: I might want to open more than 1 terminal.
+- Disposable: I want to do that, in a VPS, which I can use for a couple of hours/days, then destroy.
+- GitHub cli: I want, maybe to pull/push private repositories.
 
-For now we have to prepare VPS before leave the house:
+Agents/Models/CLI:
+- Claude Code: my daily drive for now, so that's how we start.
+- More may be added out of the box, or just install them yourself after boot. 
+
+For now, we have to prepare the VPS, before leave the house, or at least
 
 Use script `npm run create:server` and .env, or manually go in the form and create a VPS with this Cloud-init.
 

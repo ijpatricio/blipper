@@ -10,6 +10,8 @@ async function createDroplet() {
 
         let cloudInitContent = fs.readFileSync(cloudInitPath, 'utf8')
         cloudInitContent = cloudInitContent.replace('{{SSH_PUBLIC_KEY}}', process.env.SSH_PUBLIC_KEY)
+        cloudInitContent = cloudInitContent.replace('{{BASIC_AUTH_USER}}', process.env.BASIC_AUTH_USER)
+        cloudInitContent = cloudInitContent.replace('{{BASIC_AUTH_PASSWORD}}', process.env.BASIC_AUTH_PASSWORD)
 
         console.log(cloudInitContent)
 
