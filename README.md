@@ -40,7 +40,7 @@ ssh blipper@VPS_IP
 And run:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/ijpatricio/blipper/main/install/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/ijpatricio/blipper/main/install/download.sh | bash
 ```
 
 This will install Blipper, to allow having multiple SSH sessions in the VPS!
