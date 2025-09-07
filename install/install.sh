@@ -7,7 +7,6 @@ sudo apt-get update
 # Base OS (Node.sj  needs)
 sudo apt install -y build-essential
 
-
 # Install Node.js 24 using NodeSource repository
 curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -31,6 +30,15 @@ source ~/.bashrc
 # Install Claude Code
 npm install -g @anthropic-ai/claude-code
 
+# Caddy for SSL
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+chmod o+r /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy
+
 # Download Blipper
 cd ~
 git clone https://github.com/ijpatricio/blipper.git
@@ -39,7 +47,7 @@ npm ci
 cp .env.example .env
 
 echo "┌─────────────────────────────────────────────┐"
-echo "│  ⚠️  IMPORTANT: Change .env user/password   │"
-echo "│                                             │"
+echo "│  ⚠️  IMPORTANT: Change user and password    │"
+echo "│  in the .env file                           │"
 echo "│  Then run: ./install/start.sh               │"
 echo "└─────────────────────────────────────────────┘"
