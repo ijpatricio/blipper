@@ -1,6 +1,6 @@
 # Blipper
 
-Have vibe coding remotely and async. STart stuff, get out, get back and continue.
+Have vibe coding remotely and async. Start stuff, get out, get back and continue.
 
 
 Cloud-init / User data:
