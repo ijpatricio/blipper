@@ -16,11 +16,7 @@
 - **Input Handling**: Full keyboard input support including special keys and shortcuts
 - **Responsive Resizing**: Automatic terminal resize based on browser window dimensions
 
-### 3. Cross-Platform Support
-- **Shell Detection**: Automatically detects and uses appropriate shell (bash on Unix/Linux, PowerShell on Windows)
-- **Environment Inheritance**: Inherits system environment variables and user home directory
-
-### 4. Web-Based Interface
+### 3. Web-Based Interface
 - **Modern UI**: Clean, dark-themed terminal interface with customizable colors
 - **Responsive Design**: Works across different screen sizes and devices
 - **Web Links Support**: Clickable links in terminal output
@@ -54,31 +50,8 @@
 - **Input/Output**: Standard terminal keyboard shortcuts and commands
 - **Window Resize**: Automatic terminal fitting to browser window
 
-## Target Users
-
-- **Developers**: Need quick access to command line without leaving their browser
-- **System Administrators**: Managing remote systems through web interfaces
-- **Students/Educators**: Learning command line in a controlled, accessible environment
-- **Teams**: Collaborative development environments where terminals need to be shared
-
-## Success Metrics
-
-- **Responsiveness**: Terminal input/output latency under 100ms
-- **Stability**: Zero memory leaks during long-running sessions  
-- **Compatibility**: Works across major browsers (Chrome, Firefox, Safari, Edge)
-- **Scalability**: Support for multiple concurrent users and terminal sessions
-
 ## Security Considerations
 
 - Terminal processes run with the same permissions as the server process
-- No built-in authentication or access controls
-- Suitable for trusted environments or behind proper authentication layers
 - Process isolation ensures terminals don't interfere with each other
-
-## Future Enhancement Opportunities
-
-- User authentication and session management
-- Terminal sharing and collaboration features
-- Customizable themes and terminal settings
-- File upload/download capabilities
-- Terminal session persistence and recovery
+- Basic Auth for the Http server and for the Websocket Server 
