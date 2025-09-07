@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get update -y
+apt-get update
 
 # Install Node.js 24 using NodeSource repository
 curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
