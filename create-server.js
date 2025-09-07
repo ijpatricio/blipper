@@ -1,4 +1,3 @@
-
 const fs = require('fs')
 const path = require('path')
 
@@ -10,12 +9,12 @@ async function createDroplet() {
         const serverConfigPath = path.join(__dirname, 'server-config.json')
 
         const cloudInitContent = fs.readFileSync(cloudInitPath, 'utf8')
-        
+
         const serverConfigContent = fs.readFileSync(serverConfigPath, 'utf8')
         const serverConfig = JSON.parse(serverConfigContent)
-        
+
         serverConfig.user_data = cloudInitContent
-        
+
         const response = await fetch('https://api.hetzner.cloud/v1/servers', {
             method: 'POST',
             headers: {
