@@ -59,4 +59,7 @@ sudo systemctl enable blipper
 sudo systemctl start blipper
 sudo systemctl status blipper --no-pager
 
-echo "System started, visit: http://$HOST"
+MSG="System started, visit: http://$HOST"
+echo $MSG > /home/blipper/blipper-result.log
+echo $MSG
+
