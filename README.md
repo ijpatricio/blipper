@@ -21,8 +21,7 @@ groups:
   - docker
 
 # Set timezone
-timezone: Europe/London
-
+timezone: Europe/Lisbon
 ```
 
 Manually:

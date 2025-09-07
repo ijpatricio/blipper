@@ -32,8 +32,17 @@ source ~/.bashrc
 npm install -g @anthropic-ai/claude-code
 
 # Blipper
+cd ~
 git clone https://github.com/ijpatricio/blipper.git
 cd blipper
 npm ci
 
+# Start and stop manually
 # npm run start
+
+# Install Blipper as a service
+cp ~/blipper/configs/Blipper.service /etc/systemd/system/blipper.service
+sudo systemctl daemon-reload
+sudo systemctl enable blipper
+sudo systemctl start blipper
+sudo systemctl status blipper

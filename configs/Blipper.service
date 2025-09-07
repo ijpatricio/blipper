@@ -1,0 +1,18 @@
+[Unit]
+Description=Blipper Node.js Web Server
+After=network.target
+
+[Service]
+Type=simple
+User=blipper
+WorkingDirectory=/home/blipper/blipper
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=10
+Environment=NODE_ENV=production
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=blipper
+
+[Install]
+WantedBy=multi-user.target
