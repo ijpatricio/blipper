@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 sudo apt-get update
 
 # Install Node.js 24 using NodeSource repository
