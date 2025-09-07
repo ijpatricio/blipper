@@ -42,10 +42,10 @@ sudo apt install caddy
 # Get the VPS IP address
 VPS_IP=$(ip route get 8.8.8.8 | awk '{print $7}')
 HOST="static.$VPS_IP.clients.your-server.de"
-# Read the Caddyfile and replace the placeholder
-CADDYFILE=$(sed "s/__DEFAULT_HETZNER_HOST__/$HOST/g" ./install/Caddyfile)
+# Fetch the Caddyfile from GitHub and replace the placeholder
+CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/blipper/refs/heads/main/install/Caddyfile | sed "s/__DEFAULT_HETZNER_HOST__/$HOST/g")
 # Write the modified content to the Caddy configuration file
-echo "$CADDYFILE" | sudo sudo tee /etc/caddy/Caddyfile > /dev/null
+echo "$CADDYFILE" | sudo tee /etc/caddy/Caddyfile > /dev/null
 echo "Caddyfile updated with IP: $VPS_IP"
 
 # Download Blipper
