@@ -31,23 +31,15 @@ source ~/.bashrc
 # Install Claude Code
 npm install -g @anthropic-ai/claude-code
 
-# Blipper
+# Download Blipper
 cd ~
 git clone https://github.com/ijpatricio/blipper.git
 cd blipper
 npm ci
 cp .env.example .env
 
-# Install Blipper as a service, will run in the background
-sudo cp ~/blipper/install/Blipper.service /etc/systemd/system/blipper.service
-sudo systemctl daemon-reload
-sudo systemctl enable blipper
-sudo systemctl status blipper --no-pager
-
 echo "┌─────────────────────────────────────────────┐"
-echo "│  ⚠️  IMPORTANT: Change .env file first!     │"
+echo "│  ⚠️  IMPORTANT: Change .env user/password   │"
 echo "│                                             │"
-echo "│  Then run: sudo systemctl start blipper     │"
-echo "│                                             │"
-echo "│  Then visit http://VPS_IP:3000              │"
+echo "│  Then run: ./install/start.sh               │"
 echo "└─────────────────────────────────────────────┘"
