@@ -50,6 +50,7 @@ CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/blipper/refs/he
 # Write the modified content to the Caddy configuration file
 echo "$CADDYFILE" | sudo tee /etc/caddy/Caddyfile > /dev/null
 echo "Caddyfile updated with IP: $VPS_IP"
+sudo systemctl reload caddy
 
 # Install Blipper as a service, will run in the background
 sudo cp ~/blipper/install/Blipper.service /etc/systemd/system/blipper.service
