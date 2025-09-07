@@ -41,7 +41,7 @@ npm ci
 # npm run start
 
 # Install Blipper as a service
-cp ~/blipper/configs/Blipper.service /etc/systemd/system/blipper.service
+sudo cp ~/blipper/configs/Blipper.service /etc/systemd/system/blipper.service
 sudo systemctl daemon-reload
 sudo systemctl enable blipper
 sudo systemctl start blipper
