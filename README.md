@@ -3,7 +3,8 @@
 Have vibe coding remotely and async. STart stuff, get out, get back and continue.
 
 
-Cloud-init / User data
+Cloud-init / User data:
+
 ```yml
 #cloud-config
 
@@ -28,6 +29,7 @@ runcmd:
 
 ```
 
+Manually:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/ijpatricio/blipper/main/scripts/start.sh | bash
