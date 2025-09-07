@@ -1,0 +1,10 @@
+{
+  "name": "my-server",
+  "location": "nbg1",
+  "//server_type": "ccx13",
+  "server_type": "cpx21",
+  "start_after_create": true,
+  "image": "docker-ce",
+  "ssh_keys": [""],
+  "user_data": "USER_DATA_PLACEHOLDER"
+}

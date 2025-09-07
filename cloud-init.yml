@@ -1,0 +1,16 @@
+#cloud-config
+
+users:
+  - name: blipper
+    groups: sudo, docker
+    shell: /bin/bash
+    sudo: [ 'ALL=(ALL) ALL' ]
+    lock_passwd: false
+    ssh_authorized_keys:
+      - "{{SSH_PUBLIC_KEY}}"
+
+groups:
+  - docker
+
+# Set timezone
+timezone: Europe/London
