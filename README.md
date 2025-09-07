@@ -23,10 +23,6 @@ groups:
 # Set timezone
 timezone: Europe/London
 
-runcmd:
-  - |
-    curl -sSL https://raw.githubusercontent.com/ijpatricio/blipper/main/scripts/start.sh | bash
-
 ```
 
 Manually:
