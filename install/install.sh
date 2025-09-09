@@ -62,4 +62,3 @@ sudo systemctl status revico --no-pager
 MSG="System started, visit: http://$HOST"
 echo $MSG > /home/revico/revico-result.log
 echo $MSG
-
