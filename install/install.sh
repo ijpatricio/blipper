@@ -46,7 +46,7 @@ sudo apt install caddy
 IPV4=$(ip route get 8.8.8.8 | awk '{print $7}')
 HOST="revico.$IPV4.sslip.io"
 # Fetch the Caddyfile from GitHub and replace the placeholder
-CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/revico/refs/heads/main/install/Caddyfile | sed "s/__IPV4__/$IPV4/g")
+CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/remote-vibe-coder/refs/heads/main/install/Caddyfile | sed "s/__IPV4__/$IPV4/g")
 # Write the modified content to the Caddy configuration file
 echo "$CADDYFILE" | sudo tee /etc/caddy/Caddyfile > /dev/null
 echo "Caddyfile updated with IP: $IPV4"
