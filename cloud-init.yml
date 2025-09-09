@@ -19,5 +19,5 @@ runcmd:
   - |
     echo "BASIC_AUTH_USER={{BASIC_AUTH_USER}}" > /home/revico/.initial-env
     echo "BASIC_AUTH_PASSWORD={{BASIC_AUTH_PASSWORD}}" >> /home/revico/.initial-env
-    su - revico -c "curl -sSL https://raw.githubusercontent.com/ijpatricio/revico/main/install/download.sh | bash"
+    su - revico -c "curl -sSL https://raw.githubusercontent.com/ijpatricio/remote-vibe-coder/main/install/download.sh | bash"
     su - revico -c "cd /home/revico/revico && ./install/install.sh"
