@@ -1,4 +1,4 @@
-# Revico
+# Remote Vibe Coding (Revico)
 
 Revico starts with the desire to be able to tinker with agentic coding, while on the go.
 
