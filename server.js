@@ -39,7 +39,7 @@ users[process.env.BASIC_AUTH_USER || 'admin'] = process.env.BASIC_AUTH_PASSWORD 
 app.use(basicAuth({
     users: users,
     challenge: true,
-    realm: 'Blipper Terminal Access'
+    realm: 'Revico Terminal Access'
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));

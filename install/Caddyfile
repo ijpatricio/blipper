@@ -1,7 +1,7 @@
 # Refer to the Caddy docs for more information:
 # https://caddyserver.com/docs/caddyfile
 
-blipper.__IPV4__.sslip.io {
+revico.__IPV4__.sslip.io {
         reverse_proxy localhost:3000
 }
 

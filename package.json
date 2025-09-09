@@ -1,5 +1,5 @@
 {
-  "name": "blipper",
+  "name": "revico",
   "version": "1.0.0",
   "description": "Multi-terminal webapp using xtermjs",
   "main": "server.js",

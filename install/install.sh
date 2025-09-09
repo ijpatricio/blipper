@@ -44,22 +44,22 @@ sudo apt install caddy
 
 # Get the VPS IP address
 IPV4=$(ip route get 8.8.8.8 | awk '{print $7}')
-HOST="blipper.$IPV4.sslip.io"
+HOST="revico.$IPV4.sslip.io"
 # Fetch the Caddyfile from GitHub and replace the placeholder
-CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/blipper/refs/heads/main/install/Caddyfile | sed "s/__IPV4__/$IPV4/g")
+CADDYFILE=$(curl -s https://raw.githubusercontent.com/ijpatricio/revico/refs/heads/main/install/Caddyfile | sed "s/__IPV4__/$IPV4/g")
 # Write the modified content to the Caddy configuration file
 echo "$CADDYFILE" | sudo tee /etc/caddy/Caddyfile > /dev/null
 echo "Caddyfile updated with IP: $IPV4"
 sudo systemctl reload caddy
 
-# Install Blipper as a service, will run in the background
-sudo cp ~/blipper/install/Blipper.service /etc/systemd/system/blipper.service
+# Install Revico as a service, will run in the background
+sudo cp ~/revico/install/Revico.service /etc/systemd/system/revico.service
 sudo systemctl daemon-reload
-sudo systemctl enable blipper
-sudo systemctl start blipper
-sudo systemctl status blipper --no-pager
+sudo systemctl enable revico
+sudo systemctl start revico
+sudo systemctl status revico --no-pager
 
 MSG="System started, visit: http://$HOST"
-echo $MSG > /home/blipper/blipper-result.log
+echo $MSG > /home/revico/revico-result.log
 echo $MSG
 

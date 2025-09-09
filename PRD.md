@@ -1,8 +1,8 @@
-# Product Requirements Document: Blipper
+# Product Requirements Document: Revico
 
 ## Product Overview
 
-**Blipper** is a web-based multi-terminal application that provides users with the ability to create, manage, and interact with multiple terminal sessions through a web interface. Built using modern web technologies, it offers a browser-based alternative to traditional terminal applications.
+**Revico** is a web-based multi-terminal application that provides users with the ability to create, manage, and interact with multiple terminal sessions through a web interface. Built using modern web technologies, it offers a browser-based alternative to traditional terminal applications.
 
 ## Core Features
 

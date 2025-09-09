@@ -2,19 +2,19 @@
 
 set -e
 
-# Download Blipper
-cd /home/blipper
-git clone https://github.com/ijpatricio/blipper.git
-cd blipper
+# Download Revico
+cd /home/revico
+git clone https://github.com/ijpatricio/remote-vibe-coder.git revico
+cd revico
 cp .env.example .env
 
 # Check if initial-env file exists and update .env with credentials
-if [ -f "/home/blipper/.initial-env" ]; then
+if [ -f "/home/revico/.initial-env" ]; then
     echo "Found initial environment file, updating credentials..."
 
     # Extract values from .initial-env
-    BASIC_AUTH_USER=$(grep "^BASIC_AUTH_USER=" /home/blipper/.initial-env | cut -d'=' -f2)
-    BASIC_AUTH_PASSWORD=$(grep "^BASIC_AUTH_PASSWORD=" /home/blipper/.initial-env | cut -d'=' -f2)
+    BASIC_AUTH_USER=$(grep "^BASIC_AUTH_USER=" /home/revico/.initial-env | cut -d'=' -f2)
+    BASIC_AUTH_PASSWORD=$(grep "^BASIC_AUTH_PASSWORD=" /home/revico/.initial-env | cut -d'=' -f2)
 
     # Update .env file if values were found
     if [ -n "$BASIC_AUTH_USER" ]; then
@@ -27,7 +27,7 @@ if [ -f "/home/blipper/.initial-env" ]; then
         echo "✓ Updated BASIC_AUTH_PASSWORD"
     fi
 
-    rm /home/blipper/.initial-env
+    rm /home/revico/.initial-env
 
     echo "Credentials updated from initial environment file."
     echo "┌─────────────────────────────────────────────┐"
@@ -39,7 +39,7 @@ else
     echo "│  in the .env file                           │"
     echo "│                                             |"
     echo "│  Run:                                       |"
-    echo "│     cd blipper                              |"
+    echo "│     cd revico                              |"
     echo "│     nano .env                               |"
     echo "│                                             |"
     echo "│  Then run: ./install/install.sh             │"

@@ -1,18 +1,18 @@
 [Unit]
-Description=Blipper Node.js Web Server
+Description=Revico Node.js Web Server
 After=network.target
 
 [Service]
 Type=simple
-User=blipper
-WorkingDirectory=/home/blipper/blipper
+User=revico
+WorkingDirectory=/home/revico/revico
 ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=10
 Environment=NODE_ENV=production
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=blipper
+SyslogIdentifier=revico
 
 [Install]
 WantedBy=multi-user.target
