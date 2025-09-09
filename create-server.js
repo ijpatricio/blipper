@@ -13,8 +13,6 @@ async function createDroplet() {
         cloudInitContent = cloudInitContent.replace('{{BASIC_AUTH_USER}}', process.env.BASIC_AUTH_USER)
         cloudInitContent = cloudInitContent.replace('{{BASIC_AUTH_PASSWORD}}', process.env.BASIC_AUTH_PASSWORD)
 
-        console.log(cloudInitContent)
-
         const serverConfigContent = fs.readFileSync(serverConfigPath, 'utf8')
         const serverConfig = JSON.parse(serverConfigContent)
 
